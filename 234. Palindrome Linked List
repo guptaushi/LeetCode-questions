@@ -1,0 +1,40 @@
+class Solution {
+    public boolean isPalindrome(ListNode head) {
+       //find the middle of the linked list
+        ListNode slow=head;
+        ListNode fast=head;
+        while(fast!=null && fast.next!=null)
+        {
+        slow=slow.next;
+        fast=fast.next.next;
+        }
+        //if the linkedlist is odd move slow pointer to next mode
+        if(fast!=null){
+        slow=slow.next;
+        }
+
+        //now we have to reverse the second half
+        slow=reverseList(slow);
+
+        //comparing first half with second half
+        while(slow!=null){
+        if(slow.val!=head.val){
+        return false;}
+        slow=slow.next;
+        head=head.next;
+    }
+    return true;
+    }
+    //method to reverse linked list
+    private ListNode reverseList(ListNode head) {
+    ListNode prev = null;
+
+    while (head != null) {
+      ListNode next = head.next;
+      head.next = prev;
+      prev = head;
+      head = next;
+    }
+    return prev;
+  }
+}
