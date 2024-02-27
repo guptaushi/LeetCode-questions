@@ -1,0 +1,19 @@
+class Solution:
+    def threeSum(self, nums: List[int]) -> List[List[int]]:
+        nums.sort()
+        res = set()
+        for idx in range(len(nums)):
+            if nums[idx] > 0: break
+            l = idx +1 
+
+            r = len(nums) - 1
+            while(l<r):
+                if(nums[idx] + nums[l] + nums[r] == 0):
+                    res.add((nums[idx],nums[l],nums[r]))
+                    l+=1
+                elif (nums[idx] + nums[l] + nums[r]> 0):
+                    r-=1
+                else:
+                    l+=1
+        return list(res)
+                
