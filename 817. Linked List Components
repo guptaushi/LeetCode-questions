@@ -1,0 +1,22 @@
+import java.util.HashSet;
+import java.util.Set;
+class Solution {
+    public int numComponents(ListNode head, int[] nums) {
+        int count=0;
+        Set<Integer> setNums = new HashSet<>();
+        //populate setNums with values from array values
+        for (int num : nums) {
+            setNums.add(num);
+        }
+        //Traverse the linked list
+        while(head!=null){
+            if(setNums.contains(head.val)){
+                if(head.next==null|| !setNums.contains(head.next.val)){
+                    count++;
+                }
+            }
+            head=head.next;
+        }
+        return count;
+    }
+}
