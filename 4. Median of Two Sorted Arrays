@@ -1,0 +1,44 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+// Function to merge two sorted arrays into one sorted array
+void merge(int arr1[], int arr2[], int merged[], int size1, int size2) {
+   int i = 0, j = 0, k = 0;
+    while (i < size1 && j < size2) {
+        if (arr1[i] < arr2[j])
+            merged[k++] = arr1[i++];
+        else
+            merged[k++] = arr2[j++];
+    }
+
+    while (i < size1)
+        merged[k++] = arr1[i++];
+
+    while (j < size2)
+        merged[k++] = arr2[j++];
+}
+
+// Function to find the median of a sorted array
+double findMedian(int arr[], int size) {
+    if (size % 2 == 0) {
+        int mid = size / 2;
+        return (arr[mid - 1] + arr[mid]) / 2.0;
+    } else {
+        int mid = size / 2;
+        return arr[mid];
+    }
+}
+
+// Function to find the median of two sorted arrays using merge sort
+double findMedianSortedArrays(int arr1[], int size1, int arr2[], int size2) {
+    int merged_size = size1 + size2;
+    int* merged = (int*)malloc(merged_size * sizeof(int));
+
+    merge(arr1, arr2, merged, size1, size2);
+
+    double median = findMedian(merged, merged_size);
+
+    free(merged);
+
+    return median;
+}
