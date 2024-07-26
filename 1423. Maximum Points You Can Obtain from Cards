@@ -1,0 +1,20 @@
+class Solution {
+    public int maxScore(int[] cardPoints, int k) {
+        final int n = cardPoints.length;
+        final int sum = Arrays.stream(cardPoints).sum();
+        int windowsum = 0;
+
+        for (int i = 0; i< n-k; i++)
+        windowsum  += cardPoints[i];
+
+        int ans = sum - windowsum;
+
+        for (int i = 0; i< k ; i++)
+        {
+         windowsum -= cardPoints[i];
+         windowsum += cardPoints[i + n - k];
+         ans = Math.max(ans, sum - windowsum);
+        }
+        return ans;
+    }        
+}
